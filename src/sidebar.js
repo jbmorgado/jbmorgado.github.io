@@ -43,16 +43,16 @@ function createStatTable(title, emptyText, data) {
 }
 
 function calcByType(widgets) {
-  return countBy(widgets, (a) => a.type)
+  return countCards(widgets, (a) => a.type, (b) => b.card.customFields[3].value)
 }
 
-function countBy(list, keyGetter) {
+function countCards(list, keyGetter, storyPoints) {
   const map = new Map()
   list.forEach((item) => {
     const key = keyGetter(item)
     if (key === "CARD") {
       const count = map.get(key)
-      map.set(key, !count ? 1 : count + 1)
+      map.set(key, !count ? 1 : count + 1, storyPoints)
     }
   })
   return new Map([...map.entries()].sort((a, b) => b[1] - a[1]))
