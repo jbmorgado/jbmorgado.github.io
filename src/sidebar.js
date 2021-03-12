@@ -1,7 +1,7 @@
 function showStatistics(selection) {
   clear()
   const statByType = calcByType(selection)
-  getContainer().appendChild(createStatTable('by Type', 'Looks like the selection is empty.', statByType))
+  getContainer().appendChild(createStatTable('by Type', 'Empty selection.', statByType))
 }
 
 function clear() {
@@ -50,8 +50,10 @@ function countBy(list, keyGetter) {
   const map = new Map()
   list.forEach((item) => {
     const key = keyGetter(item)
-    const count = map.get(key)
-    map.set(key, !count ? 1 : count + 1)
+    if (key === "CARD") {
+      const count = map.get(key)
+      map.set(key, !count ? 1 : count + 1)
+    }
   })
   return new Map([...map.entries()].sort((a, b) => b[1] - a[1]))
 }

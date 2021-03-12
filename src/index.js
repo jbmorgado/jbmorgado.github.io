@@ -5,7 +5,7 @@ miro.onReady(() => {
   miro.initialize({
     extensionPoints: {
       bottomBar: {
-        title: 'widget counter',
+        title: 'jira stats',
         svgIcon: icon24,
         onClick: () => {
           miro.board.ui.openLeftSidebar('sidebar.html')
