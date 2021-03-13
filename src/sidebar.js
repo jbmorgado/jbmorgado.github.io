@@ -54,7 +54,7 @@ function countCards(list, keyGetter) {
     if (key === "CARD") {
       const count = map.get(key)
       map.set("Stories", !count ? 1 : count + 1)
-      storyPoints = storyPoints + item.customFields[3].value
+      storyPoints = storyPoints + item.card.customFields[3].value
       map.set("Story Points", storyPoints)
     }
   })
