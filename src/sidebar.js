@@ -47,16 +47,18 @@ function calcByType(widgets) {
 }
 
 function countCards(list, keyGetter) {
-  // let storyPoints = 0
+  let storyPoints = 0
+  let stories = 0
   const map = new Map()
   list.forEach((item) => {
     const key = keyGetter(item)
     if (key === "CARD") {
-      const count = map.get(key)
-      map.set("Stories", !count ? 1 : count + 1)
-      map.set(key, !count ? 1 : count + 1)
-      // storyPoints = storyPoints + parseFloat(item.card.customFields[3].value)
-      // map.set("Story Points", storyPoints)
+      // const count = map.get(key)
+      stories = stories + 1
+      map.set("Stories", stories)
+      // map.set(key, !count ? 1 : count + 1)
+      storyPoints = storyPoints + parseFloat(item.card.customFields[3].value)
+      map.set("Story Points", storyPoints)
     }
   })
   return new Map([...map.entries()].sort((a, b) => b[1] - a[1]))
