@@ -43,19 +43,21 @@ function createStatTable(title, emptyText, data) {
 }
 
 function calcByType(widgets) {
-  return countCards(widgets, (a) => a.type, (b) => b.card.customFields[3].value)
+  return countCards(widgets, (a) => a.type)
 }
 
-function countCards(list, keyGetter, storyPoints) {
-  const map = new Map()
+function countCards(list, keyGetter) {
+  const mapNStories = new Map()
+  const mapSPoints = new Map()
   list.forEach((item) => {
     const key = keyGetter(item)
     if (key === "CARD") {
       const count = map.get(key)
-      map.set(key, !count ? 1 : count + 1, storyPoints)
+      mapNStories.set("Stories", !count ? 1 : count + 1)
     }
+  // (b) => b.card.customFields[3].value
   })
-  return new Map([...map.entries()].sort((a, b) => b[1] - a[1]))
+  return new Map([...mapNStories.entries()].sort((a, b) => b[1] - a[1]))
 }
 
 miro.onReady(() => {
