@@ -47,17 +47,18 @@ function calcByType(widgets) {
 }
 
 function countCards(list, keyGetter) {
-  const mapNStories = new Map()
-  const mapSPoints = new Map()
+  let storyPoints = 0
+  const map = new Map()
   list.forEach((item) => {
     const key = keyGetter(item)
     if (key === "CARD") {
       const count = map.get(key)
-      mapNStories.set("Stories", !count ? 1 : count + 1)
+      map.set("Stories", !count ? 1 : count + 1)
+      let storyPoints = storyPoints + item.customFields[3].value
+      map.set("Story Points", storyPoints)
     }
-  // (b) => b.card.customFields[3].value
   })
-  return new Map([...mapNStories.entries()].sort((a, b) => b[1] - a[1]))
+  return new Map([...map.entries()].sort((a, b) => b[1] - a[1]))
 }
 
 miro.onReady(() => {
