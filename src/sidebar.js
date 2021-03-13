@@ -61,7 +61,8 @@ function countCards(list, keyGetter) {
       map.set("Story Points", storyPoints)
     }
   })
-  return new Map([...map.entries()].sort((a, b) => b[1] - a[1]))
+  return map
+  // return new Map([...map.entries()].sort((a, b) => b[1] - a[1]))
 }
 
 miro.onReady(() => {
