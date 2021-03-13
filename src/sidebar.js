@@ -46,7 +46,7 @@ function calcByType(widgets) {
   let storyPoints = 0
   let stories = 0
   const map = new Map()
-  list.forEach((item) => {
+  widgets.forEach((item) => {
     // const key = keyGetter(item)
     if (item.type === "CARD") {
       // const count = map.get(key)
