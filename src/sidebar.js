@@ -46,11 +46,8 @@ function calcByType(widgets) {
   const map = new Map()
   widgets.forEach((item) => {
     if (item.type === "CARD") {
-      // const status = item.card.customFields[0].value
-      // const countStatus = map.get(status)
       const stories = map.get("Stories")
       const storyPoints = map.get("Story Points")
-      // map.set(status, !countStatus ? 1 : countStatus + 1)
       map.set("Stories", !stories ? 1 : stories + 1)
       map.set("Story Points", !storyPoints ? parseFloat(item.card.customFields[3].value) : storyPoints + parseFloat(item.card.customFields[3].value))
     }
