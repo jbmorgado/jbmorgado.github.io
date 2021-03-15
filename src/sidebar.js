@@ -45,15 +45,16 @@ function createStatTable(title, emptyText, data) {
 function calcByType(widgets) {
   const map = new Map()
   widgets.forEach((item) => {
-    if (item.type === "CARD") {
+    const key = item.type
+    if (key === "CARD") {
       const stories = map.get("Stories")
       const storyPoints = map.get("Story Points")
       map.set("Stories", !stories ? 1 : stories + 1)
       map.set("Story Points", !storyPoints ? parseFloat(item.card.customFields[3].value) : storyPoints + parseFloat(item.card.customFields[3].value))
     }
   })
-  return map
-  // return new Map([...map.entries()].sort((a, b) => b[1] - a[1]))
+  // return map
+  return new Map([...map.entries()].sort((a, b) => b[1] - a[1]))
 }
 
 miro.onReady(() => {
