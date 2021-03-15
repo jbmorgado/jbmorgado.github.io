@@ -1,6 +1,6 @@
-function showStatistics(selection) {
+function showStatistics() {
   clear()
-  const statByType = calcByType(selection)
+  const statByType = calcByType()
   getContainer().appendChild(createStatTable('by Type', 'Empty selection.', statByType))
 }
 
@@ -58,11 +58,8 @@ function createStatTable(title, emptyText, data) {
 //   return new Map([...map.entries()].sort((a, b) => b[1] - a[1]))
 // }
 
-function calcByType(widgets) {
-  return countBy(widgets, (a) => a.type)
-}
-
-function countBy(list, keyGetter) {
+function calcByType() {
+  list = miro.board.selection.get()
   const map = new Map()
   list.forEach((item) => {
     const key = keyGetter(item)
@@ -80,8 +77,6 @@ function countBy(list, keyGetter) {
 }
 
 miro.onReady(() => {
-  miro.addListener('SELECTION_UPDATED', (e) => {
-    showStatistics(e.data)
-  })
+  miro.addListener('SELECTION_UPDATED', showStatistics())
   miro.board.selection.get().then(showStatistics)
 })
