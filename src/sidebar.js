@@ -42,19 +42,40 @@ function createStatTable(title, emptyText, data) {
   return statView
 }
 
+// function calcByType(widgets) {
+//   const map = new Map()
+//   widgets.forEach((item) => {
+//     const key = item.type
+//     if (key === "CARD") {
+//       const stories = map.get("Stories")
+//       const storyPoints = map.get("Story Points")
+//       let sStoryPoints = parseFloat(item.card.customFields[3].value)
+//       map.set("Stories", !stories ? 1 : stories + 1)
+//       map.set("Story Points", !storyPoints ? sStoryPoints : storyPoints + sStoryPoints)
+//     }
+//   })
+//   // return map
+//   return new Map([...map.entries()].sort((a, b) => b[1] - a[1]))
+// }
+
 function calcByType(widgets) {
+  return countBy(widgets, (a) => a.type)
+}
+
+function countBy(list, keyGetter) {
   const map = new Map()
-  widgets.forEach((item) => {
-    const key = item.type
+  list.forEach((item) => {
+    const key = keyGetter(item)
     if (key === "CARD") {
-      const stories = map.get("Stories")
+      const count = map.get("Stories")
+      map.set("Stories", !count ? 1 : count + 1)
+      // const stories = map.get("Stories")
       const storyPoints = map.get("Story Points")
       let sStoryPoints = parseFloat(item.card.customFields[3].value)
-      map.set("Stories", !stories ? 1 : stories + 1)
+      // map.set("Stories", !stories ? 1 : stories + 1)
       map.set("Story Points", !storyPoints ? sStoryPoints : storyPoints + sStoryPoints)
     }
   })
-  // return map
   return new Map([...map.entries()].sort((a, b) => b[1] - a[1]))
 }
 
