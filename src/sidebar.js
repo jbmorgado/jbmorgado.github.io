@@ -47,7 +47,7 @@ function calcByType(widgets) {
   // let stories = 0
   const map = new Map()
   widgets.forEach((item) => {
-    const key = keyGetter(item)
+    const key = item.type
     if (item.type === "CARD") {
       const count = map.get(key)
       // stories = stories + 1
