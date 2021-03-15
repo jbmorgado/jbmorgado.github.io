@@ -49,8 +49,9 @@ function calcByType(widgets) {
     if (key === "CARD") {
       const stories = map.get("Stories")
       const storyPoints = map.get("Story Points")
+      let sStoryPoints = parseFloat(item.card.customFields[3].value)
       map.set("Stories", !stories ? 1 : stories + 1)
-      map.set("Story Points", !storyPoints ? parseFloat(item.card.customFields[3].value) : storyPoints + parseFloat(item.card.customFields[3].value))
+      map.set("Story Points", !storyPoints ? sStoryPoints : storyPoints + sStoryPoints)
     }
   })
   // return map
