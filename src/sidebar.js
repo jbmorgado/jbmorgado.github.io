@@ -67,8 +67,8 @@ function countBy(list, keyGetter) {
   list.forEach((item) => {
     const key = keyGetter(item)
     if (key === "CARD") {
-      const count = map.get("Stories")
-      map.set("Stories", !count ? 1 : count + 1)
+      const count = map.get(key)
+      map.set(key, !count ? 1 : count + 1)
       // const stories = map.get("Stories")
       const storyPoints = map.get("Story Points")
       let sStoryPoints = parseFloat(item.card.customFields[3].value)
