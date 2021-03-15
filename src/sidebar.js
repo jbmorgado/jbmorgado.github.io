@@ -59,8 +59,8 @@ function createStatTable(title, emptyText, data) {
 // }
 
 function calcByType() {
-  list = miro.board.selection.get()
   const map = new Map()
+  list = await miro.board.selection.get()
   list.forEach((item) => {
     const key = keyGetter(item)
     if (key === "CARD") {
@@ -78,5 +78,5 @@ function calcByType() {
 
 miro.onReady(() => {
   miro.addListener('SELECTION_UPDATED', showStatistics())
-  miro.board.selection.get().then(showStatistics)
+  // miro.board.selection.get().then(showStatistics)
 })
